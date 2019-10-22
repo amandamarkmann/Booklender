@@ -25,9 +25,9 @@ public class LibraryUser {
 	}
 	
 	
-	public LibraryUser() {
-		
-	}
+	public LibraryUser() {}
+	
+	
 
 	public String getName() {
 		return name;
