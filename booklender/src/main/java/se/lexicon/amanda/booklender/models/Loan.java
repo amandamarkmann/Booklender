@@ -18,19 +18,16 @@ public class Loan {
 	private boolean terminated;
 	
 
-	public Loan(long loanId, LibraryUser loanTaker, Book book, LocalDate loanDate, boolean terminated) {
+	public Loan(long loanId, LibraryUser loanTaker, Book book, LocalDate loanDate) {
+		this(loanTaker, book, loanDate);
 		this.loanId = loanId;
-		this.loanTaker = loanTaker;
-		this.book = book;
-		this.loanDate = loanDate;
-		this.terminated = terminated;
 	}
 
-	public Loan(LibraryUser loanTaker, Book book, LocalDate loanDate, boolean terminated) {
+	public Loan(LibraryUser loanTaker, Book book, LocalDate loanDate) {
 		this.loanTaker = loanTaker;
 		this.book = book;
 		this.loanDate = loanDate;
-		this.terminated = terminated;
+		setTerminated(false);
 	}
 	
 	
@@ -57,7 +54,8 @@ public class Loan {
 	}
 
 	public void setTerminated(boolean terminated) {
-		this.terminated = terminated;
+		this.book.setAvailable(true);
+		this.terminated = true;
 	}
 
 	public long getLoanId() {

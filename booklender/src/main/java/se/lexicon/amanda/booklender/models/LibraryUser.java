@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class LibraryUser {
-	
 	private int userId;
 	private LocalDate regDate;
 	private String name;
@@ -12,10 +11,8 @@ public class LibraryUser {
 	
 	
 	public LibraryUser(int userId, LocalDate regDate, String name, String email) {
+		this(regDate, name, email);
 		this.userId = userId;
-		this.regDate = regDate;
-		this.name = name;
-		this.email = email;
 	}
 
 	public LibraryUser(LocalDate regDate, String name, String email) {
