@@ -32,7 +32,7 @@ public class BookTest {
 		String expectedTitle = "Harry Potter";
 		
 		
-		assertTrue(testBook.getBookId() == 1);
+		assertEquals(1, testBook.getBookId());
 		assertEquals(expectedTitle, testBook.getTitle());
 		assertEquals(expectedMaxLoanDays, testBook.getMaxLoanDays());
 		assertEquals(expectedFinePerDay, testBook.getFinePerDay());
@@ -44,7 +44,7 @@ public class BookTest {
 	
 	@Test
 	public void test_equals_and_hashcode_true() {
-		Book copy = new Book("Harry Potter", 31, BigDecimal.valueOf(10), "Test description");
+		Book copy = new Book(1, "Harry Potter", 31, BigDecimal.valueOf(10), "Test description");
 
 		assertTrue(copy.equals(testBook));
 		assertEquals(copy.hashCode(), testBook.hashCode());
@@ -54,11 +54,9 @@ public class BookTest {
 	public void test_toString_contains_correct_information() {
 		String toString = testBook.toString();
 		
-		assertTrue(
-				toString.contains("Harry Potter") &&
-				toString.contains("31") &&
-				toString.contains("10") &&
-				toString.contains("Test description")
-			);
+		assertTrue(toString.contains("Harry Potter"));
+		assertTrue(toString.contains("31"));
+		assertTrue(toString.contains("10"));
+		assertTrue(toString.contains("Test description"));
 }
 }

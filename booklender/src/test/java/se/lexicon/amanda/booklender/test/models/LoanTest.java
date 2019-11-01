@@ -41,14 +41,103 @@ public class LoanTest {
 		assertEquals(testUser, testLoan.getLoanTaker());
 		assertEquals(testBook, testLoan.getBook());
 		assertEquals(expectedLoanDate, testLoan.getLoanDate());
-		assertFalse(testLoan.getBook().isAvailable());
+		assertTrue(testLoan.getBook().isAvailable());
 		assertFalse(testLoan.isTerminated());
 		}
 	
+	@Test
+	public void test_returned_book_loanIsTerminated_and_bookIsAvailable() {
+		testLoan.returnedBook();
+		
+		assertTrue(testLoan.isTerminated());
+		assertTrue(testBook.isAvailable());
+	}
+	
+	@Test
+	public void test_loan_is_overdue() {
+		
+		Loan testLoan = new Loan(testUser, testBook, LocalDate.now().minusDays(32));
+		
+		assertTrue(testLoan.isOverdue());
+	}
+	
+	@Test
+	public void test_loan_is_not_overdue() {
+		
+		Loan testLoan = new Loan(testUser, testBook, LocalDate.now().minusDays(29));
+		
+		assertFalse(testLoan.isOverdue());
+	}
+	
+	@Test
+	public void test_will_get_fine_of_30() {
+		BigDecimal expectedFine = BigDecimal.valueOf(30);
+		
+		LocalDate threeDaysOverdue = LocalDate.now().minusDays(34);
+		
+		Loan overdueLoan = new Loan(testUser, testBook, threeDaysOverdue);
+		
+		assertEquals(expectedFine, overdueLoan.getFine());
+		
+	}
+	
+	@Test
+	public void test_will_not_get_fine() {
+		BigDecimal expectedFine = BigDecimal.ZERO;
+		
+		LocalDate noDaysOverdue = LocalDate.now().minusDays(26);
+		
+		Loan notOverdueLoan = new Loan (testUser, testBook, noDaysOverdue);
+		
+		assertEquals(expectedFine, notOverdueLoan.getFine());
+		
+	}
+	
+	@Test
+	public void test_extendLoan_is_possible() {
+		
+		Loan wantToExtendLoan = new Loan(testUser, testBook, LocalDate.now().minusDays(2));
+		
+		assertTrue(wantToExtendLoan.extendLoan());
+	}
 	
 	
-	//test loan is terminated
-	//test isOverdue
-	//test getFine
-	//test extendLoan
+	@Test
+	public void test_extendLoan_return_false_while_overdue() {
+		
+		LocalDate threeDaysOverdue = LocalDate.now().minusDays(34);
+		
+		Loan overdueLoan = new Loan(testUser, testBook, threeDaysOverdue);
+		
+		assertFalse(overdueLoan.extendLoan());
+	}
+	
+	
+	@Test
+	public void test_extendLoan_return_false_if_book_is_reserved() {
+		
+		testBook.setReserved(true);
+		
+		assertFalse(testLoan.extendLoan());
+	}
+
+	
+	@Test
+	public void test_equals_and_hashcode_true() {
+		Loan copy = new Loan (testUser, testBook, LocalDate.parse("2019-10-30"));
+
+		assertTrue(copy.equals(testLoan));
+		assertEquals(copy.hashCode(), testLoan.hashCode());
+	}
+	
+	
+	@Test
+	public void test_toString_contains_correct_information() {
+		String toString = testLoan.toString();
+		
+		assertTrue(toString.contains("Test Testsson"));
+		assertTrue(toString.contains("Harry Potter"));
+		assertTrue(toString.contains("2019-10-30"));
+}
+	
 }

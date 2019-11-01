@@ -46,11 +46,9 @@ public class LibraryUserTest {
 		public void test_toString_contains_correct_information() {
 			String toString = testUser.toString();
 			
-			assertTrue(
-					toString.contains("2019-10-30") &&
-					toString.contains("Test Testsson") &&
-					toString.contains("test@testsson.se")
-				);
+			assertTrue(toString.contains("2019-10-30"));
+			assertTrue(toString.contains("Test Testsson"));
+			assertTrue(toString.contains("test@testsson.se"));
 	}
 		
 		

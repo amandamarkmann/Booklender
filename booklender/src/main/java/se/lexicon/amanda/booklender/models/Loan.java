@@ -27,7 +27,7 @@ public class Loan {
 		this.loanTaker = loanTaker;
 		this.book = book;
 		this.loanDate = loanDate;
-		setTerminated(false);
+		this.terminated = false;
 	}
 	
 	
@@ -46,6 +46,11 @@ public class Loan {
 	}
 
 	public void setBook(Book book) {
+		if(!book.isAvailable()) {
+			throw new IllegalArgumentException("Book is not available");
+		}
+		book.setAvailable(false);
+		
 		this.book = book;
 	}
 
@@ -53,10 +58,11 @@ public class Loan {
 		return terminated;
 	}
 
-	public void setTerminated(boolean terminated) {
+	public void returnedBook() {
 		this.book.setAvailable(true);
 		this.terminated = true;
 	}
+	
 
 	public long getLoanId() {
 		return loanId;
