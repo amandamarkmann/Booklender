@@ -5,13 +5,36 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Loan {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long loanId;
 	
+	
+	@ManyToOne(fetch = FetchType.LAZY, 
+			cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
+	)
+	@JoinColumn(name = "user_id")
 	private LibraryUser loanTaker;
 	
+	
+	@ManyToOne(fetch = FetchType.LAZY, 
+			cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
+	)
+	@JoinColumn(name = "book_id")
 	private Book book;
+	
 	
 	private LocalDate loanDate;
 
