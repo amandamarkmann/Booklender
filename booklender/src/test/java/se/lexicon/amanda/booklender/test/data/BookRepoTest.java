@@ -80,7 +80,7 @@ public class BookRepoTest {
 		testBook.setReserved(false);
 		List<Book> result = testObject.findByReserved(true);
 		int expectedSize = 0;
-		assertEquals(result.size(), expectedSize);
+		assertEquals(expectedSize, result.size());
 		assertFalse(result.contains(testBook));
 	}
 	
