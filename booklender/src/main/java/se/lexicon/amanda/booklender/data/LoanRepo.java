@@ -9,8 +9,8 @@ import se.lexicon.amanda.booklender.models.Loan;
 public interface LoanRepo extends CrudRepository<Loan, Long> {
 
 	Optional<Loan> findByLoanId (long loanId);
-	Optional<Loan> findByBookBookId (int bookId);
-	Optional<Loan> findByLoanTakerUserId (int userId);
+	List<Loan> findByBookBookId (int bookId);
+	List<Loan> findByLoanTakerUserId (int userId);
 	
 	List<Loan> findByTerminated (boolean terminated);
 	

@@ -98,7 +98,8 @@ public class LoanTest {
 		
 		Loan wantToExtendLoan = new Loan(testUser, testBook, LocalDate.now().minusDays(2));
 		
-		assertTrue(wantToExtendLoan.extendLoan());
+		assertTrue(wantToExtendLoan.extendLoan(LocalDate.now()));
+		assertEquals(LocalDate.now(), wantToExtendLoan.getLoanDate());
 	}
 	
 	
@@ -109,7 +110,7 @@ public class LoanTest {
 		
 		Loan overdueLoan = new Loan(testUser, testBook, threeDaysOverdue);
 		
-		assertFalse(overdueLoan.extendLoan());
+		assertFalse(overdueLoan.extendLoan(threeDaysOverdue));
 	}
 	
 	
@@ -118,7 +119,7 @@ public class LoanTest {
 		
 		testBook.setReserved(true);
 		
-		assertFalse(testLoan.extendLoan());
+		assertFalse(testLoan.extendLoan(LocalDate.now()));
 	}
 
 	

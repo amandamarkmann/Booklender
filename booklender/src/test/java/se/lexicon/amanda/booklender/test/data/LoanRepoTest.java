@@ -87,17 +87,17 @@ public class LoanRepoTest {
 	
 	@Test
 	public void test_findByUserId() {
-		Optional<Loan> result = testObject.findByLoanTakerUserId(testUser.getUserId());
-		assertTrue(result.isPresent());
-		assertEquals(testUser.getUserId(), result.get().getLoanTaker().getUserId());
+		List<Loan> result = testObject.findByLoanTakerUserId(testUser.getUserId());
+		assertFalse(result.isEmpty());
+		assertEquals(1,result.size());
 	}
 	
 	
 	@Test
 	public void test_findByBookId() {
-		Optional<Loan> result = testObject.findByBookBookId(testBook.getBookId());
-		assertTrue(result.isPresent());
-		assertEquals(testBook.getBookId(), result.get().getBook().getBookId());
+		List<Loan> result = testObject.findByBookBookId(testBook.getBookId());
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
 	}
 	
 }

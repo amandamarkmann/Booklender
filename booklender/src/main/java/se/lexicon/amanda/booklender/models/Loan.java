@@ -76,7 +76,8 @@ public class Loan {
 		
 		this.book = book;
 	}
-
+	
+	
 	public boolean isTerminated() {
 		return terminated;
 	}
@@ -116,13 +117,16 @@ public class Loan {
 		return fine;
 	}
 	
-	public boolean extendLoan() {
+	public boolean extendLoan(LocalDate newLoanDate) {
 		if(book.isReserved() || isOverdue()) {
 			return false;
-		}		
+		}
+		if(loanDate.plusDays(book.getMaxLoanDays()).isAfter(newLoanDate) || loanDate.plusDays(book.getMaxLoanDays()).equals(newLoanDate)) {
 		
-		this.loanDate.isEqual(LocalDate.now());
-		return true;		
+		this.loanDate=newLoanDate;
+		return true;
+		}
+		return false;		
 	}
 
 	@Override
