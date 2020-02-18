@@ -28,28 +28,28 @@ public class BookController {
 		this.bookService = bookService;
 	}
 
-	@GetMapping("api/books/{bookId}")
+	@GetMapping("api/book/{bookId}")
 	public ResponseEntity<Optional<BookDto>> findById(@PathVariable ("bookId") int bookId){
 	
 	return ResponseEntity.ok().body(bookService.findById(bookId));
 	}
 	
 	
-	@GetMapping("api/books/find")
+	@GetMapping("api/book/find")
 	public ResponseEntity<List<BookDto>> find(
 			@RequestParam(defaultValue = "all", name = "type") String type,
 			@RequestParam(required = false, name = "value") String value) {
 		
-		if(type.equalsIgnoreCase("all") && value == null) {
+		if(type.contentEquals("all") && value == null) {
 			return ResponseEntity.ok(bookService.findAll());
 		}
-		else if(type.equalsIgnoreCase("title")) {
+		else if(type.contentEquals("title")) {
 			return ResponseEntity.ok(bookService.findByTitle(value));
 		}
-		else if(type.equalsIgnoreCase("available")) {
+		else if(type.contentEquals("available")) {
 			return ResponseEntity.ok(bookService.findByAvailable(Boolean.valueOf(value)));
 		}
-		else if(type.equalsIgnoreCase("reserved")) {
+		else if(type.contentEquals("reserved")) {
 			return ResponseEntity.ok(bookService.findByReserved(Boolean.valueOf(value)));
 		}
 		else {
@@ -61,7 +61,7 @@ public class BookController {
 	
 	
 	
-	@PostMapping("api/books")
+	@PostMapping("api/book")
 	public ResponseEntity<BookDto> create(@RequestBody BookDto bookDto) {
 		
 		if(bookDto == null) {
@@ -73,7 +73,7 @@ public class BookController {
 		
 	}
 		
-	@PutMapping("api/books")
+	@PutMapping("api/book")
 	public ResponseEntity<BookDto> update(@RequestBody BookDto bookDto) {
 		
 		if(bookDto == null) {

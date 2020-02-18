@@ -63,6 +63,11 @@ public class LoanServiceImpl implements LoanService {
 		
 		Loan loanEntity = converter.dtoToLoan(loanDto);
 		
+		
+		//hämta låntagare och bok för att få postmantest att funka
+	
+		
+		
 		loanEntity = loanRepo.save(loanEntity);
 		
 		return converter.loanToDto(loanEntity);

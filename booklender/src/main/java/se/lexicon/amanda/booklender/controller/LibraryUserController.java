@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import se.lexicon.amanda.booklender.dto.LibraryUserDto;
@@ -27,20 +26,20 @@ public class LibraryUserController {
 		this.libraryUserService = libraryUserService;
 	}
 
-	@GetMapping("api/library_users/{userId}")
+	@GetMapping("api/library_user/{userId}")
 	public ResponseEntity<Optional<LibraryUserDto>> findById(@PathVariable ("userId") int userId){
 	
 	return ResponseEntity.ok().body(libraryUserService.findById(userId));
 	}
 	
-	@GetMapping("api/library_users/{email}")
-	public ResponseEntity<Optional<LibraryUserDto>> findByEmail(@RequestParam (name = "email") String email){
+	@GetMapping("api/library_user/email/{email}")
+	public ResponseEntity<Optional<LibraryUserDto>> findByEmail(@PathVariable ("email") String email){
 		
 		return ResponseEntity.ok().body(libraryUserService.findByEmail(email));
 	}
 	
 	
-	@GetMapping("api/library_users")
+	@GetMapping("api/library_user/all")
 	public ResponseEntity<List<LibraryUserDto>> findAll(){
 		
 			return ResponseEntity.ok().body(libraryUserService.findAll());
@@ -48,7 +47,7 @@ public class LibraryUserController {
 	}
 
 	
-	@PostMapping("api/library_users")
+	@PostMapping("api/library_user")
 	public ResponseEntity<LibraryUserDto> create(@RequestBody LibraryUserDto libraryUserDto) {
 		
 		if(libraryUserDto == null) {
@@ -60,7 +59,7 @@ public class LibraryUserController {
 		
 	}
 		
-	@PutMapping("api/library_users")
+	@PutMapping("api/library_user")
 	public ResponseEntity<LibraryUserDto> update(@RequestBody LibraryUserDto libraryUserDto) {
 		
 		if(libraryUserDto == null) {

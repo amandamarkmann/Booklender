@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class EntityFactory {
 
-	protected Book createBook(int bookId, String title, int maxLoanDays, BigDecimal finePerDay, String description) {
+	protected Book createBook(int bookId, String title, int maxLoanDays, BigDecimal finePerDay, String description, boolean available, boolean reserved) {
 		return new Book(bookId, title, maxLoanDays, finePerDay, description);
 	}
 	

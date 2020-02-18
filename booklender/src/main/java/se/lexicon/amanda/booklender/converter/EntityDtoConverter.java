@@ -23,6 +23,8 @@ public class EntityDtoConverter extends EntityFactory {
 		dto.setMaxLoanDays(book.getMaxLoanDays());
 		dto.setFinePerDay(book.getFinePerDay());
 		dto.setDescription(book.getDescription());
+		dto.setAvailable(book.isAvailable());
+		dto.setReserved(book.isReserved());
 		return dto;
 	}
 	
@@ -35,7 +37,7 @@ public class EntityDtoConverter extends EntityFactory {
 		}
 
 	public Book dtoToBook(BookDto dto) {
-		Book book = createBook(dto.getBookId(), dto.getTitle(), dto.getMaxLoanDays(), dto.getFinePerDay(), dto.getDescription());
+		Book book = createBook(dto.getBookId(), dto.getTitle(), dto.getMaxLoanDays(), dto.getFinePerDay(), dto.getDescription(), dto.isAvailable(), dto.isReserved());
 		return book;
 	}
 	

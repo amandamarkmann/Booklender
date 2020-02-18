@@ -26,27 +26,27 @@ public class LoanController {
 		this.loanService = loanService;
 	}
 	
-	@GetMapping("api/loans/{loanId}")
+	@GetMapping("api/loan/{loanId}")
 	public ResponseEntity<Optional<LoanDto>> findById(@PathVariable ("loanId") long loanId){
 	
 	return ResponseEntity.ok().body(loanService.findById(loanId));
 	}
 
 	
-	@GetMapping("api/loans")
+	@GetMapping("api/loan/find")
 	public ResponseEntity<List<LoanDto>> find
 						(@RequestParam (defaultValue = "all", name = "type") String type,
 						@RequestParam (required = false, name = "value") String value) {
-			if(type.equalsIgnoreCase("all") && value == null) {
+			if(type.contentEquals("all") && value == null) {
 				return ResponseEntity.ok().body(loanService.findAll());
 			}
-			else if(type.equalsIgnoreCase("terminated")) {
+			else if(type.contentEquals("terminated")) {
 				return ResponseEntity.ok(loanService.findByTerminated(Boolean.valueOf(value)));
 			}
-			else if(type.equalsIgnoreCase("userId")) {
+			else if(type.contentEquals("userId")) {
 				return ResponseEntity.ok(loanService.findByUserId(Integer.parseInt(value)));
 			}
-			else if(type.equalsIgnoreCase("bookId")) {
+			else if(type.contentEquals("bookId")) {
 				return ResponseEntity.ok(loanService.findByBookId(Integer.parseInt(value)));
 			}
 			else {
@@ -55,7 +55,7 @@ public class LoanController {
 		}
 	
 	
-	@PostMapping("api/loans")
+	@PostMapping("api/loan")
 	public ResponseEntity<LoanDto> create(@RequestBody LoanDto loanDto) {
 		
 		if(loanDto == null) {
@@ -67,7 +67,7 @@ public class LoanController {
 		
 	}
 		
-	@PutMapping("api/loans")
+	@PutMapping("api/loan")
 	public ResponseEntity<LoanDto> update(@RequestBody LoanDto loanDto) {
 		
 		if(loanDto == null) {
