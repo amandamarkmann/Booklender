@@ -501,7 +501,42 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n        \"loanId\": 123,\r\n        \"loanTaker\": {\r\n            \"userId\": 11,\r\n            \"regDate\": \"2019-02-22\",\r\n            \"name\": \"Amanda\",\r\n            \"email\": \"amanda@life.se\"\r\n        },\r\n        \"book\": {\r\n            \"bookId\": 1,\r\n            \"title\": \"Harry Potter\",\r\n            \"available\": true,\r\n            \"reserved\": true,\r\n            \"maxLoanDays\": 15,\r\n            \"finePerDay\": 10.00,\r\n            \"description\": \"Awesome\"\r\n        },\r\n        \"loanDate\": \"2020-01-30\",\r\n        \"terminated\": false\r\n    }",
+					"raw": "{\r\n    \"loanId\": 123,\r\n    \"loanTaker\": {\r\n        \"userId\": 11,\r\n        \"regDate\": \"2019-02-22\",\r\n        \"name\": \"Amanda\",\r\n        \"email\": \"amanda@life.se\"\r\n    },\r\n    \"book\": {\r\n        \"bookId\": 1,\r\n        \"title\": \"Harry Potter\",\r\n        \"available\": true,\r\n        \"reserved\": true,\r\n        \"maxLoanDays\": 15,\r\n        \"finePerDay\": 10.00,\r\n        \"description\": \"Awesome\"\r\n    },\r\n    \"loanDate\": \"2020-01-22\",\r\n    \"terminated\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/loan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"loan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/loan",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"loanId\": 0,\r\n         \"loanTaker\": {\r\n        \"userId\": 22\r\n    },\r\n     \"book\": {\r\n        \"bookId\": 1\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

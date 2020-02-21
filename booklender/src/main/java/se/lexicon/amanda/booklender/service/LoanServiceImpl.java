@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import se.lexicon.amanda.booklender.converter.EntityDtoConverter;
+import se.lexicon.amanda.booklender.data.BookRepo;
+import se.lexicon.amanda.booklender.data.LibraryUserRepo;
 import se.lexicon.amanda.booklender.data.LoanRepo;
 import se.lexicon.amanda.booklender.dto.LoanDto;
 import se.lexicon.amanda.booklender.models.Loan;
@@ -16,13 +18,24 @@ import se.lexicon.amanda.booklender.models.Loan;
 public class LoanServiceImpl implements LoanService {
 
 	private LoanRepo loanRepo;
+	
+	private LibraryUserRepo userRepo;
+	
+	private BookRepo bookRepo;
+	
 	private EntityDtoConverter converter;
 	
+	
 	@Autowired
-	public LoanServiceImpl(LoanRepo loanRepo, EntityDtoConverter converter) {
+	public LoanServiceImpl(LoanRepo loanRepo, LibraryUserRepo userRepo, BookRepo bookRepo,
+			EntityDtoConverter converter) {
 		this.loanRepo = loanRepo;
+		this.userRepo = userRepo;
+		this.bookRepo = bookRepo;
 		this.converter = converter;
 	}
+
+
 
 	@Override
 	public Optional<LoanDto> findById(long loanId) {
@@ -64,11 +77,14 @@ public class LoanServiceImpl implements LoanService {
 		Loan loanEntity = converter.dtoToLoan(loanDto);
 		
 		
-		//hämta låntagare och bok för att få postmantest att funka
-	
+		loanEntity.setLoanTaker(userRepo.findById(loanEntity.getLoanTaker().getUserId()).get());
+		
+		loanEntity.setBook(bookRepo.findByBookId(loanEntity.getBook().getBookId()).get());
+		
 		
 		
 		loanEntity = loanRepo.save(loanEntity);
+		
 		
 		return converter.loanToDto(loanEntity);
 	}
